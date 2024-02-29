@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 
 namespace CsharpCLIapp
 {
@@ -32,6 +33,9 @@ namespace CsharpCLIapp
                     case "help":
                         Help();
                         break;
+                    case "ipconfig":
+                        Ipconfig();
+                        break;
                 }
             }
         }
@@ -41,6 +45,19 @@ namespace CsharpCLIapp
         {
             Console.WriteLine("EXIT".PadRight(15) + "Quit the program");
             Console.WriteLine("HELP".PadRight(15) + "Provides Help information for CsharpCLI");
+            Console.WriteLine("IPCONFIG".PadRight(15) + "Displays the local IP address");
+        }
+
+        static void Ipconfig()
+        {
+            string hostname = Dns.GetHostName();
+            IPHostEntry ipEntry = Dns.GetHostEntry(hostname);
+            IPAddress[] ipAddresses = ipEntry.AddressList;
+
+            foreach(IPAddress ipAddress in ipAddresses)
+            {
+                Console.WriteLine($"Local IP Address: {ipAddress}");
+            }
         }
     }
 }
