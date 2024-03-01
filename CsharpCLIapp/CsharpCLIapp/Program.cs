@@ -36,6 +36,9 @@ namespace CsharpCLIapp
                     case "ipconfig":
                         Ipconfig();
                         break;
+                    case "clear":
+                        Console.Clear();
+                        break;
                 }
             }
         }
@@ -45,9 +48,12 @@ namespace CsharpCLIapp
         {
             Console.WriteLine("EXIT".PadRight(15) + "Quit the program");
             Console.WriteLine("HELP".PadRight(15) + "Provides Help information for CsharpCLI");
+            Console.WriteLine("CLEAR".PadRight(15) + "Clears the screen");
             Console.WriteLine("IPCONFIG".PadRight(15) + "Displays the local IP address");
+
         }
 
+        // Ipconfig
         static void Ipconfig()
         {
             string hostname = Dns.GetHostName();
