@@ -39,6 +39,9 @@ namespace CsharpCLIapp
                     case "clear":
                         Console.Clear();
                         break;
+                    case "time":
+                        Console.WriteLine(DateTime.Now);
+                        break;
                 }
             }
         }
@@ -50,7 +53,7 @@ namespace CsharpCLIapp
             Console.WriteLine("HELP".PadRight(15) + "Provides Help information for CsharpCLI");
             Console.WriteLine("CLEAR".PadRight(15) + "Clears the screen");
             Console.WriteLine("IPCONFIG".PadRight(15) + "Displays the local IP address");
-
+            Console.WriteLine("TIME".PadRight(15) + "Displays the current time");
         }
 
         // Ipconfig
