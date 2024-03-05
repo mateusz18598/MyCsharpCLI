@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.IO;
 
 namespace CsharpCLIapp
 {
@@ -42,6 +43,16 @@ namespace CsharpCLIapp
                     case "time":
                         Console.WriteLine(DateTime.Now);
                         break;
+                    case "touch":
+                        string fileName = "";
+
+                        while (string.IsNullOrWhiteSpace(fileName))
+                        {
+                            Console.Write("Enter your file name: ");
+                            fileName = Console.ReadLine();
+                        }
+                        Touch(fileName);
+                        break;
                 }
             }
         }
@@ -54,6 +65,7 @@ namespace CsharpCLIapp
             Console.WriteLine("CLEAR".PadRight(15) + "Clears the screen");
             Console.WriteLine("IPCONFIG".PadRight(15) + "Displays the local IP address");
             Console.WriteLine("TIME".PadRight(15) + "Displays the current time");
+            Console.WriteLine("TOUCH".PadRight(15) + "Creates a .txt file");
         }
 
         // Ipconfig
@@ -66,6 +78,22 @@ namespace CsharpCLIapp
             foreach(IPAddress ipAddress in ipAddresses)
             {
                 Console.WriteLine($"Local IP Address: {ipAddress}");
+            }
+        }
+
+        // Touch
+        static void Touch(string fileName)
+        {
+            try
+            {
+                using StreamWriter writer = new StreamWriter(fileName+ ".txt");
+                {
+                    Console.WriteLine($"File: {fileName}.txt has been created");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occured: " + ex.Message);
             }
         }
     }
