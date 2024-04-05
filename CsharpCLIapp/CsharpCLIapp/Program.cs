@@ -28,7 +28,7 @@ namespace CsharpCLIapp
                     default:
                         Console.WriteLine($"{option}: command not found");
                         break;
-                    case "exit":
+                    case "exit": // Quit the program
                         exit = true;
                         break;
                     case "help":
@@ -37,10 +37,10 @@ namespace CsharpCLIapp
                     case "ipconfig":
                         Ipconfig();
                         break;
-                    case "clear":
+                    case "clear": // Clears the screen
                         Console.Clear();
                         break;
-                    case "time":
+                    case "time": // Displays the current time
                         Console.WriteLine(DateTime.Now);
                         break;
                     case "touch":
@@ -53,11 +53,22 @@ namespace CsharpCLIapp
                         }
                         Touch(fileName);
                         break;
+                    case "mkdir":
+                        string dirName = "";
+
+                        while (string.IsNullOrWhiteSpace(dirName))
+                        {
+                            Console.Write("Enter your file name: ");
+                            dirName = Console.ReadLine();
+                        }
+                        Mkdir(dirName);
+                        break;
+
                 }
             }
         }
 
-        // Help
+        // Help - Provides Help information for CsharpCLI
         static void Help()
         {
             Console.WriteLine("EXIT".PadRight(15) + "Quit the program");
@@ -66,6 +77,7 @@ namespace CsharpCLIapp
             Console.WriteLine("IPCONFIG".PadRight(15) + "Displays the local IP address");
             Console.WriteLine("TIME".PadRight(15) + "Displays the current time");
             Console.WriteLine("TOUCH".PadRight(15) + "Creates a .txt file");
+            Console.WriteLine("MKDIR".PadRight(15) + "Creates a directory");
         }
 
         // Ipconfig
@@ -91,9 +103,31 @@ namespace CsharpCLIapp
                     Console.WriteLine($"File: {fileName}.txt has been created");
                 }
             }
-            catch (Exception ex)
+            catch 
             {
-                Console.WriteLine("An error occured: " + ex.Message);
+                Console.WriteLine("An error occured");
+            }
+        }
+
+        //Mkdir 
+        static void Mkdir(string fileName)
+        {
+            try
+            {
+                if(Directory.Exists(fileName))
+                {
+                    Console.WriteLine("Directory exists already");
+                }
+                else
+                {
+                    DirectoryInfo di = Directory.CreateDirectory(fileName);
+                    Console.WriteLine("Directory has been created");
+                }
+
+            }
+            catch
+            {
+                Console.WriteLine($"The process failed");
             }
         }
     }
