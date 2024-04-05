@@ -30,11 +30,11 @@ namespace CsharpCLIapp
                         break;
                     case "exit": // Quit the program
                         exit = true;
-                        break;
-                    case "help":
+                        break; 
+                    case "help": // Provides Help information for CsharpCLI
                         Help();
                         break;
-                    case "ipconfig":
+                    case "ipconfig": // Displays the local IP address
                         Ipconfig();
                         break;
                     case "clear": // Clears the screen
@@ -43,7 +43,7 @@ namespace CsharpCLIapp
                     case "time": // Displays the current time
                         Console.WriteLine(DateTime.Now);
                         break;
-                    case "touch":
+                    case "touch": // Creates a .txt file
                         string fileName = "";
 
                         while (string.IsNullOrWhiteSpace(fileName))
@@ -53,7 +53,7 @@ namespace CsharpCLIapp
                         }
                         Touch(fileName);
                         break;
-                    case "mkdir":
+                    case "mkdir": // Creates a directory
                         string dirName = "";
 
                         while (string.IsNullOrWhiteSpace(dirName))
@@ -66,7 +66,7 @@ namespace CsharpCLIapp
                         Mkdir(dirName);
                         break;
                         
-                    case "echo":
+                    case "echo": // Print text
                         string message = "";
                         while (string.IsNullOrWhiteSpace(message))
                         {
@@ -76,7 +76,7 @@ namespace CsharpCLIapp
 
                         Echo(message);
                         break;
-                    case "rm":
+                    case "rm": // Remove a file or directory
                         string file = "";
                         while (string.IsNullOrWhiteSpace(file))
                         {
@@ -86,6 +86,13 @@ namespace CsharpCLIapp
 
                         Rm(file);
                         break;
+                    case "ls": // List the contents of the current directory
+                        Ls();
+                        break;
+                    case "pwd": // Print working directory
+                        Pwd();                        
+                        break;
+
 
                 }
             }
@@ -103,6 +110,8 @@ namespace CsharpCLIapp
             Console.WriteLine("MKDIR".PadRight(15) + "Creates a directory");
             Console.WriteLine("ECHO".PadRight(15) + "Print text");
             Console.WriteLine("RM".PadRight(15) + "Remove a file or directory");
+            Console.WriteLine("LS".PadRight(15) + "List the contents of the current directory");
+            Console.WriteLine("PWD".PadRight(15) + "Print working directory");
         }
 
         // Ipconfig - Displays the local IP address
@@ -190,6 +199,28 @@ namespace CsharpCLIapp
                     Console.WriteLine("Directory doesn't exists");
                 }
             }
+        }
+
+        // Ls - List the contents of the current directory
+        static void Ls()
+        {
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string[] files = Directory.GetFiles(currentDirectory);
+
+            foreach(string file in files)
+            {
+                string fileName = Path.GetFileName(file);
+                Console.WriteLine(fileName);
+            }
+            
+        }
+
+        // Pwd - Print working directory
+
+        static void Pwd()
+        {
+            string currentDirectory = Directory.GetCurrentDirectory();
+            Console.WriteLine(currentDirectory);
         }
 
     }
