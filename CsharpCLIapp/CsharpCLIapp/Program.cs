@@ -60,8 +60,31 @@ namespace CsharpCLIapp
                         {
                             Console.Write("Enter your file name: ");
                             dirName = Console.ReadLine();
+
                         }
+
                         Mkdir(dirName);
+                        break;
+                        
+                    case "echo":
+                        string message = "";
+                        while (string.IsNullOrWhiteSpace(message))
+                        {
+                            Console.Write("Enter your message: ");
+                            message = Console.ReadLine();
+                        }
+
+                        Echo(message);
+                        break;
+                    case "rm":
+                        string file = "";
+                        while (string.IsNullOrWhiteSpace(file))
+                        {
+                            Console.Write("Enter your file name: ");
+                            file = Console.ReadLine();
+                        }
+
+                        Rm(file);
                         break;
 
                 }
@@ -78,9 +101,11 @@ namespace CsharpCLIapp
             Console.WriteLine("TIME".PadRight(15) + "Displays the current time");
             Console.WriteLine("TOUCH".PadRight(15) + "Creates a .txt file");
             Console.WriteLine("MKDIR".PadRight(15) + "Creates a directory");
+            Console.WriteLine("ECHO".PadRight(15) + "Print text");
+            Console.WriteLine("RM".PadRight(15) + "Remove a file or directory");
         }
 
-        // Ipconfig
+        // Ipconfig - Displays the local IP address
         static void Ipconfig()
         {
             string hostname = Dns.GetHostName();
@@ -93,7 +118,7 @@ namespace CsharpCLIapp
             }
         }
 
-        // Touch
+        // Touch - Creates a .txt file
         static void Touch(string fileName)
         {
             try
@@ -109,7 +134,7 @@ namespace CsharpCLIapp
             }
         }
 
-        //Mkdir 
+        // Mkdir - Creates a directory
         static void Mkdir(string fileName)
         {
             try
@@ -130,5 +155,42 @@ namespace CsharpCLIapp
                 Console.WriteLine($"The process failed");
             }
         }
+
+        // Echo - Print text
+        static void Echo(string message)
+        {
+            Console.WriteLine(message);
+        }
+
+        // Rm - Remove a file or directory
+        static void Rm(string file)
+        {
+
+            if(file.EndsWith(".txt"))
+            {
+                try
+                {
+                    File.Delete(file);
+                    Console.WriteLine("File has been removed");
+                }
+                catch
+                {
+                    Console.WriteLine("File doesn't exists");
+                }
+            }
+            else
+            {
+                try
+                {
+                    Directory.Delete(file, true);
+                    Console.WriteLine("Directory has been removed");
+                }
+                catch
+                {
+                    Console.WriteLine("Directory doesn't exists");
+                }
+            }
+        }
+
     }
 }
